@@ -10,10 +10,8 @@ interface CarCardProps {
   car: CarProps;
 }
 
-const CarCard = ({
-  car: { city_mpg, year, make, model, transmission, drive },
-}: CarCardProps) => {
-  const carRent = calculateCarRent(city_mpg, year);
+const CarCard = ({ car }: CarCardProps) => {
+  const carRent = calculateCarRent(car.city_mpg, car.year);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -21,7 +19,7 @@ const CarCard = ({
     <div className="car-card group">
       <div className="car-card__content-title">
         <h2>
-          {make} {model}
+          {car.make} {car.model}
         </h2>
       </div>
       <p className="flex mt-6 text-[32px] font-extrabold">
@@ -48,16 +46,16 @@ const CarCard = ({
               alt="steering wheel"
             />
             <p className="text-[14px]">
-              {transmission === "a" ? "Automatic" : "Manual"}
+              {car.transmission === "a" ? "Automatic" : "Manual"}
             </p>
           </div>
           <div className="flex flex-col justify-center items-center gap-2">
             <Image src="/tire.svg" width={20} height={20} alt="tire" />
-            <p className="text-[14px]">{drive.toUpperCase()}</p>
+            <p className="text-[14px]">{car.drive.toUpperCase()}</p>
           </div>
           <div className="flex flex-col justify-center items-center gap-2">
             <Image src="/gas.svg" width={20} height={20} alt="gas" />
-            <p className="text-[14px]">{city_mpg} MPG</p>
+            <p className="text-[14px]">{car.city_mpg} MPG</p>
           </div>
         </div>
         <div className="car-card__btn-container">
@@ -73,7 +71,7 @@ const CarCard = ({
       <CarDetails
         isOpen={isOpen}
         closeModal={() => setIsOpen(false)}
-        car={{ city_mpg, year, make, model, transmission, drive }}
+        car={car}
       />
     </div>
   );
