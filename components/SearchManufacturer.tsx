@@ -11,16 +11,14 @@ const SearchManufacturer = ({
   manufacturer,
   setManufacturer,
 }: SearchManufacturerProps) => {
-  const [query, setQuery] = useState("");
-
   const filteredManufacturers =
-    query === ""
+    manufacturer === ""
       ? manufacturers
       : manufacturers.filter((item) =>
           item
             .toLowerCase()
             .replace(/\s+/g, "")
-            .includes(query.toLowerCase().replace(/\s+/g, ""))
+            .includes(manufacturer?.toLowerCase().replace(/\s+/g, ""))
         );
 
   return (
@@ -39,15 +37,15 @@ const SearchManufacturer = ({
           <Combobox.Input
             className="search-manufacturer__input"
             placeholder="Volkswagen"
-            displayValue={(manufacturer: string) => manufacturer}
-            onChange={(e) => setQuery(e.target.value)}
+            displayValue={(selected: string) => selected}
+            value={manufacturer}
+            onChange={(e) => setManufacturer(e.target.value)}
           />
           <Transition
             as={Fragment}
             leave="transition ease-in duration-100"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
-            afterLeave={() => setQuery("")}
           >
             <Combobox.Options>
               {filteredManufacturers.map((item) => (

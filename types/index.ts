@@ -1,4 +1,9 @@
-import { ChangeEventHandler, MouseEventHandler } from "react";
+import {
+  ChangeEventHandler,
+  MouseEventHandler,
+  Dispatch,
+  SetStateAction,
+} from "react";
 
 export interface CustomButtonProps {
   title: string;
@@ -12,7 +17,7 @@ export interface CustomButtonProps {
 
 export interface SearchManufacturerProps {
   manufacturer: string;
-  setManufacturer: (manufacturer: string) => void;
+  setManufacturer: Dispatch<SetStateAction<string>>;
 }
 
 export interface CarProps {
@@ -52,9 +57,18 @@ export interface OptionProps {
 export interface CustomFilterProps {
   title: string;
   options: OptionProps[];
+  setFilter: Dispatch<SetStateAction<any>>;
 }
 
 export interface ShowMoreProps {
   pageNumber: number;
   isNext: boolean;
+  setLimit: Dispatch<SetStateAction<number>>;
+}
+
+export interface SearchBarProps {
+  manufacturer: string;
+  setManufacturer: Dispatch<SetStateAction<string>>;
+  model: string;
+  setModel: Dispatch<SetStateAction<string>>;
 }
